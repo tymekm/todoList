@@ -1,0 +1,10 @@
+{%extends "item/layout.html"%}
+{%block content%}
+    <p>Add new item: </p>
+    <form action="{%url 'item:newItem'%}" method='post'>
+	{%csrf_token%}
+	{{form.as_p}}
+	<button name='submit'>add item</button>
+    </form>
+{%endblock content%}
+

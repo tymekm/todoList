@@ -1,0 +1,8 @@
+{%extends 'item/layout.html'%}
+{%block content%}
+<h3>{{item.title}}</h3>
+<div class="item-body">{{item.body}}</div>
+<div class="item-deadline">Deadline: {{item.deadline}}</div>
+<div class="item-created-at">Created at: {{item.createdAt}}</div>
+<a href="/item">Go back</a>
+{%endblock%}
