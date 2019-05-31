@@ -1,9 +1,11 @@
-{%extends 'item/layout.html'%}
+{%extends 'item/base.html'%}
 {%block content%}
 <h3>Hello there</h3>
 <ul>
     {%for item in items%}
     <li><a href="/item/details/{{item.id}}">{{item.title}}</a></li>
+    {%empty%}
+    <li>No items have been added yet</li>
     {%endfor%}
 </ul>
 <a href="{%url 'item:newItem'%}">Add new item</a>

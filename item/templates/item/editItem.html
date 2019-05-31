@@ -1,0 +1,10 @@
+{%extends "item/base.html"%}
+{%block content%}
+{% comment %}<p><a href="{%url 'item:item' item.id%}">{{title}}</a></p>{% endcomment %}
+    <p>Edit item: </p>
+    <form action="{%url 'item:editItem' item.id%}" method='post'>
+	{%csrf_token%}
+	{{form.as_p}}
+	<button name='submit'>save changes</button>
+    </form>
+{%endblock content%}

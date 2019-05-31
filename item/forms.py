@@ -5,5 +5,6 @@ from .models import Item
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['body']
+        fields = ['title', 'body', 'deadline', 'priority']
         lables = {'body': ''}
+        deadline = forms.DateTimeField

@@ -26,10 +26,25 @@ def newItem(request):
     if request.method != 'POST':
         form = ItemForm
     else:
-        form = ItemForm(data=request.Post)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('item:items'))
+        form = ItemForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('item:index'))
 
     context = {'form': form}
     return render(request, 'item/newItem.html', context)
+
+
+def editItem(request, id):
+    item = Item.objects.get(id=id)
+
+    if request.method != 'POST':
+        form = ItemForm(instance=item)
+    else:
+        form = ItemForm(instance=item, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('item:index'))
+
+    context = {'item': item, 'form': form}
+    return render(request, 'item/editItem.html', context)

@@ -1,8 +1,9 @@
-{%extends 'item/layout.html'%}
+{%extends 'item/base.html'%}
 {%block content%}
-<h3>{{item.title}}</h3>
-<div class="item-body">{{item.body}}</div>
-<div class="item-deadline">Deadline: {{item.deadline}}</div>
-<div class="item-created-at">Created at: {{item.createdAt}}</div>
-<a href="/item">Go back</a>
+    <h3>{{item.title}}</h3>
+    <div class="item-body">{{item.body}}</div>
+    <div class="item-deadline">Deadline: {{item.deadline}}</div>
+    <div class="item-created-at">Created at: {{item.createdAt}}</div>
+    <a href="/item">Go back</a>
+    <p><a href="{%url 'item:editItem' item.id%}">edit item</a></p>
 {%endblock%}

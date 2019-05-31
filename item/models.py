@@ -6,12 +6,12 @@ class Item(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
     deadline = models.DateTimeField()
-    priorities = [
+    PRIORITIES = [
         ('L', 'Low'),
         ('M', 'Medium'),
         ('H', 'High'),
     ]
-    priority = models.CharField(max_length=1, choices=priorities, default='M')
+    priority = models.CharField(max_length=1, choices=PRIORITIES, default='M')
     createdAt = models.DateTimeField(default=datetime.now, blank=True)
 
     class Meta:
