@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 
 class Item(models.Model):
@@ -13,6 +14,7 @@ class Item(models.Model):
     ]
     priority = models.CharField(max_length=1, choices=PRIORITIES, default='M')
     createdAt = models.DateTimeField(default=datetime.now, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = 'items'
