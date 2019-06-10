@@ -1,4 +1,0 @@
-#!/bin/bash
-doas systemctl start mysqld.service
-source ./py/bin/activate
-python ./manage.py runserver
