@@ -46,7 +46,6 @@ def newItem(request):
 @login_required
 def completeItem(request, id):
     item = Item.objects.get(id=id)
-    item.title = "work?"
     item.isComplete = True
     item.save()
     return HttpResponseRedirect(reverse('item:index'))
