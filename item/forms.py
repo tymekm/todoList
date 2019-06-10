@@ -7,4 +7,5 @@ class ItemForm(forms.ModelForm):
         model = Item
         fields = ['title', 'body', 'deadline', 'priority']
         lables = {'body': ''}
-        deadline = forms.DateTimeField
+        widgets = {'event_date': forms.DateInput(
+            attrs={'class': 'datepicker'})}

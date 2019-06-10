@@ -44,6 +44,15 @@ def newItem(request):
 
 
 @login_required
+def completeItem(request, id):
+    item = Item.objects.get(id=id)
+    item.title = "work?"
+    item.isComplete = True
+    item.save()
+    return HttpResponseRedirect(reverse('item:index'))
+
+
+@login_required
 def deleteItem(request, id):
     Item.objects.get(id=id).delete()
     return HttpResponseRedirect(reverse('item:index'))

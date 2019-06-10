@@ -1,11 +1,33 @@
 {%extends 'item/base.html'%}
+
+{%block header%}
+	<h1>{{item.title}}</h1>
+{%endblock header%}
+
 {%block content%}
-    <h3>{{item.title}}</h3>
-    <div class="item-body">{{item.body}}</div>
-    <div class="item-deadline">Deadline: {{item.deadline}}</div>
-    <div class="item-created-at">Created at: {{item.createdAt}}</div>
-    <p><a href="{%url 'item:editItem' item.id%}">edit item</a></p>
-    <p><a onclick="return confirm('Are you sure?')" 
-	    href="{%url 'item:deleteItem' item.id%}">delete item</a></p>
-   <a href="/item">Go back</a>
+	<div class="panel panel-default">
+		<div class="panerl-heading">
+			<h3> Deadline: {{item.deadline|date:'d M, Y H:i'}} </h3>
+		</div>
+		<div class="panel-body">
+			{{item.body|linebreaks}}
+			Created at: {{item.createdAt}}
+			<br>
+			{% now "Y-m-d" as todayDate %}
+			{%if todayDate > item.deadline|date:"Y-m-d" and item.isComplete == False %}
+				<a class="btn btn-danger" href="#">Deadline Passed!</a>
+			{%else%}
+				<a class="btn btn-success"
+				href="{%url 'item:completeItem' item.id%}">Complete Item
+				</a>
+			{%endif%}
+			<br/>
+			<a href="{%url 'item:editItem' item.id%}">edit item
+			</a>
+			| 
+			<a onclick="return confirm('Are you sure?')" 
+				href="{%url 'item:deleteItem' item.id%}">delete item
+			</a>
+		</div>
+	</div>
 {%endblock%}

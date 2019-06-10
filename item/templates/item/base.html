@@ -1,24 +1,64 @@
+{%load bootstrap3%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+		<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Todo List</title>
+    {%bootstrap_css%}
+    {%bootstrap_javascript%}
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$( function() {
+		$( "#id_deadline" ).datepicker();
+		} );
+	</script>
+
 </head>
+
 <body>
-   <header>
+   <title>
        <h1>Todo List</h1>
-   </header>
-   <div class="container">
-	{%if user.is_authenticated%} 
-	    Hello, {{user.username}}
-	    <a href="{%url 'users:logout'%}">logout</a>
-	{%else%}
-	    <a href="{%url 'users:login'%}">log in</a>
-	    <a href="{%url 'users:register'%}">register</a>
-	{%endif%}
-	{%block content%}
-	{%endblock%}
-   </div>
-   <br>
+    </title>
+    <nav class="navbar navbar-default navbar-static-top">
+	<div class="container">
+	    <div class="navbar-header">
+		<button class="navbar-toggle collapsed"
+		    data-toggle="callapse" data-target="#navbar"
+		    aria-expanded="false" aria-controls="navbar">
+		</button>
+		<a class="navbar-brand" href="{%url 'item:index'%}">
+		    Todo List
+		</a>
+	    </div>
+
+	    <div id="navbar" class="navbar-collapse collapse">
+		<ul class="nav navbar-nav navbar-right">
+		    {%if user.is_authenticated%} 
+			<li><a>Hello, {{user.username}}</a></li>
+			<li><a href="{%url 'users:logout'%}">log out</a></li>
+		    {%else%}
+			<li><a href="{%url 'users:register'%}">register</a></li>
+			<li><a href="{%url 'users:login'%}">log in</a></li>
+		    {%endif%}
+		</ul>
+	    </div>
+	</div>
+    </nav>
+    <div class="container">
+        <div class="page-header">
+	    {%block header%}  
+	    {%endblock header%}  
+	</div>
+        <div>
+	    {%block content%}  
+	    {%endblock content%}  
+	</div>
+    </div>
 </body>
 </html>

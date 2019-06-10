@@ -1,12 +1,46 @@
 {%extends 'item/base.html'%}
+
+{%block header%}
+<div class="jumbotron">
+    <h3>{{user.username}}'s Todo list</h3>
+</div>
+{%endblock header%}
+
 {%block content%}
-<h3>Hello there</h3>
-<ul>
-    {%for item in items%}
-    <li><a href="/item/details/{{item.id}}">{{item.title}}</a></li>
-    {%empty%}
-    <li>No items have been added yet</li>
-    {%endfor%}
+    <a href="{%url 'item:newItem'%}">Add new item</a>
+    <ul>
+	{%for item in items%}
+	<div role="alert" 
+	{% now "Y-m-d" as todayDate %}
+	    {%if todayDate > item.deadline|date:"Y-m-d" and item.isComplete == False %}
+		class="alert alert-danger"
+	    {%elif item.isComplete == True%}
+		class="align-top alert alert-success"
+	    {%else%}
+		class="alert alert-info"
+	    {%endif%} >
+
+	    <a href="/item/details/{{item.id}}" 
+		class="alert-link">{{item.title}}</a>
+		Deadline: 
+		{{item.deadline|date:'d M, Y H:i'}}
+	    {%if todayDate > item.deadline|date:"Y-m-d" and item.isComplete == False%}
+		<div style="font-size:2rem" class="pull-right ">
+		    &#x274c;Deadline passed
+		</div>
+	    {%elif item.isComplete == False%}
+		<div class="pull-right ">{{item.priority}} priority</div>
+	    {%endif%}
+
+	    {%if item.isComplete == True%}
+		<div style="font-size:2rem" class="pull-right ">
+		    &#x2713;Complete 
+		</div>
+	    {%endif%}
+	    </div>
+
+	{%empty%}
+	    <li>No items have been added yet</li>
+	{%endfor%}
 </ul>
-<a href="{%url 'item:newItem'%}">Add new item</a>
 {%endblock%}

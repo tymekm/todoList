@@ -28,12 +28,16 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 LOGIN_URL = '/users/login/'
+BOOTSTRAP3 = {
+    'include_jquery': True
+}
 
 # Application definition
 
 INSTALLED_APPS = [
     'item',
     'users',
+    'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
